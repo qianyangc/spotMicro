@@ -18,6 +18,8 @@ Enter one of the following options:
 quit: stop and quit the program
 walk: Start walk mode and keyboard motion control
 stand: Stand robot up
+idle: Lay robot down
+angle_cmd: enter angle control mode
 
 Keyboard commands for body motion 
 ---------------------------
@@ -53,11 +55,6 @@ class SpotMicroKeyboardControl():
         self._angle_cmd_msg.x = 0
         self._angle_cmd_msg.y = 0
         self._angle_cmd_msg.z = 0
-
-        self._speed_cmd_msg = Vector3()
-        self._speed_cmd_msg.x = 0
-        self._speed_cmd_msg.y = 0
-        self._speed_cmd_msg.z = 0
 
         self._vel_cmd_msg = Twist()
         self._vel_cmd_msg.linear.x = 0
@@ -202,7 +199,7 @@ class SpotMicroKeyboardControl():
 
                     # Publish walk event
                     self._ros_pub_walk_cmd.publish(self._walk_event_cmd_msg)
-                    rospy.loginfo('Idle command issued from keyboard.')
+                    rospy.loginfo('Walk command issued from keyboard.')
 
                     # Prompt user with info and enter loop to act on user command
                     print('Enter command, u to go back to stand mode: ')

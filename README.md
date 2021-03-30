@@ -69,6 +69,13 @@ git submodule update --recursive
 
 If any git permission errors are encountered, try the following suggestions via [this stackoverflow post](https://stackoverflow.com/questions/8197089/fatal-error-when-updating-submodule-using-git).
 
+Three additional ROS packages may need to be installed for this project to build succesfully. They can be installed via:
+```
+sudo apt-get install ros-kinetic-joy
+sudo apt-get install ros-kinetic-rplidar-ros
+sudo apt-get install ros-kinetic-hector-slam
+```
+
 Since the same repo is checked out on both a pi and a laptop/PC, you will need to install an i2c library on the laptop/pc for the software to compile correctly. The `i2cpwm_board` node is not run on the laptop/pc, but compilation will look for dependencies for this node. Install the necessary library via:
 `sudo apt-get install libi2c-dev`
 
@@ -149,6 +156,8 @@ A yaml confguration file is used for holding various software configuration sett
 * **i2cpwm_board**: Node that controls the pca 9685 servo control board. Operates mostly under proportional control mode, but also in absolute control mode to command servos to idle
 
 * **spot_micro_keyboard_command**: Node that sends state, motion, and rate commands to the motion control node via keyboard
+
+* **spot_micro_joy**: Sends the same commands like the keyboard_command_node but is controlled by sensor_msgs/Joy, which are emitted by joy_node. By default it is configured for PS4 button-layout. Make sure to take a look into the [joystick control](docs/joystick_control.md) documentaion before trying.
 
 * **lcd_monitor**: Node that displays basic state information and control values on the lcd monitor
 
